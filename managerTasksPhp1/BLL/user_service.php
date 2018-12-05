@@ -16,21 +16,15 @@ class user_service extends base_service {
                 });
            return $users;
     }
-     function get_departments($query) {
-        $departments = db_access:: run_reader($query, function ($model) {
-                    return $this->init_department($model);
-                });
-           return $departments;
-    }
 
     function get_all_users($manager_id) {
        $query ='SELECT * FROM user u JOIN department d ON u.departmentUserId=d.id LEFT JOIN user uu ON u.managerId=uu.id';
         return $this->get_users($query);
     }
     
-     function get_all_departments() {
-       $query ='SELECT * FROM managertasks.department';
-        return $this->get_departments($query);
+     function get_all_department($manager_id) {
+       $query ='SELECT * FROM user u JOIN department d ON u.departmentUserId=d.id LEFT JOIN user uu ON u.managerId=uu.id';
+        return $this->get_users($query);
     }
 
    // function get_all_team_users($team_leader_id) {

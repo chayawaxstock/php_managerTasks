@@ -24,37 +24,15 @@ class base_service {
        // return $new_user;
     }
 
-
-    function init_project($project) {
-//      print_r($project);
-          $new_project = array();
-        $new_project['projectId'] = $project['projectId'];
-        $new_project['projectName'] = $project['name'];
-        $new_project['customerName'] = $project['customerName'];
-        $new_project['numHourForProject'] = $project['numHour'];
-        $new_project['dateBegin'] = $project['dateBegin'];
-        $new_project['dateEnd'] = $project['dateEnd'];
-        $new_project['isFinish'] = $project['isFinish'];
-        $new_project['idManager'] = $project['managerId'];     
-        if (array_key_exists('id', $project)) {
-            $new_project['manager'] = array();
-            $new_project['manager']['userName'] = $project['userName'];
-        }
-          print_r($new_project);
-        return $new_project;
-    }
-    
-    
-  function init_projectworker($model) {
-      print_r($model);
-
+    function init_project($model) {
+        echo 'init project';
     }
 
     function init_department($department) {
-        $new_department = array();
-        $new_department['id'] = $department['id'];
-        $new_department['department'] = $department['department'];
-        return $new_department;
+       // $new_department = array();
+       // $new_department['departmentId'] = $department['department_id'];
+       // $new_department['departmentName'] = $department['department_name'];
+       // return $new_department;
     }
 
     function init_worker_hours($worker_hours) {

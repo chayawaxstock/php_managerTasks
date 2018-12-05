@@ -8,6 +8,7 @@ class db_access {
 
         $resultObj = $connection->query($query);
 
+
         /* create one master array of the records */
         $list = array();
 

@@ -3,7 +3,7 @@
 $dbPassword = "1234";
 $dbUserName = "root";
 $dbServer = "localhost";
-$dbName = "managertasks";
+$dbName = "taskManager";
 
 $connection = new mysqli($dbServer, $dbUserName, $dbPassword, $dbName);
 

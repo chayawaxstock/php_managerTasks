@@ -4,11 +4,10 @@
 require './routes_loader.php';
 
 //API
-require './API/controllers/projectworker_controller.php';
 require './API/controllers/department_controller.php';
 require './API/controllers/presentday_controller.php';
 require './API/controllers/project_controller.php';
-
+require './API/controllers/projectworker_controller.php';
 require './API/controllers/user_controller.php';
 
 //BLL
