@@ -8,16 +8,23 @@ class projectworker_service extends base_service {
                 });
            return $projectworkers;
     }
+    
+     function get_users($query) {
+        $users = db_access:: run_reader($query, function ($model) {
+                    return $this->init_user($model);
+                });
+           return $users;
+    }
 
     function get_workers_not_in_project($project_id)
     {
         $query="SELECT * FROM managertasks.user WHERE departmentUserId>2 and id not in(SELECT id FROM projectworker WHERE projectId=$project_id) GROUP BY id";
-        return $this->get_projectworkers($query);
+        return $this->get_users($query);
     }
     function  get_workers_in_project($project_id)
     {
         $query="SELECT u.*, d.* FROM managertasks.user u JOIN managertasks.department d  ON u.departmentUserId = d.id join projectworker p on u.id = p.id where p.projectId = $project_id ";
-            return $this->get_projectworkers($query);
+            return $this->get_users($query);
     }
     
     function  get_users_teamLeader_project($teamleader_id,$project_id)

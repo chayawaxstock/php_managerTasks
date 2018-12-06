@@ -20,7 +20,13 @@ class db_access {
     static function run_scalar($query) {
         global $connection;
         $resultObj = $connection->query($query);
-        return $resultObj;
+        return mysqli_fetch_field($resultObj);
+    }
+
+    static function run_non_query($query) {
+        global $connection;
+        $resultObj = $connection->query($query);
+        return $connection->affected_rows;
     }
 
 }

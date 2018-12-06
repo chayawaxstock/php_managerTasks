@@ -27,4 +27,11 @@ class user_controller {
     function get_user_by_id($user_id) {
         return $this->user_service->get_user_by_id($user_id);
     }
+    function  delete_user($userId){
+         return $this->user_service->delete_user($userId); 
+    }
+    function add_user($user){
+        print_r($user) ;
+        return $this->user_service->add_user($user); 
+    }
 }

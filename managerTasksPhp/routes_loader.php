@@ -27,8 +27,9 @@ class routes_loader {
     }
 
     function invoke($controller_name, $method_name, $params) {
+
         $data = $this->methods[$controller_name][$method_name]($params);
-        echo json_encode($data);
+        return json_encode($data);
     }
 
     function get_users_methods() {
@@ -44,7 +45,13 @@ class routes_loader {
             },
             'getUserById' => function ($params) {
                 // return $this->user_controller->get_user_by_id($params['userId']);
-            }
+            },
+            'deleteUser' => function ($params) {
+                return $this->user_controller->delete_user($params['userId']);
+            },
+            'addUser' => function ($params) {
+                return $this->user_controller->add_user($params);
+            },
         );
     }
 
@@ -53,6 +60,14 @@ class routes_loader {
             'getAllProjects' => function ($params) {
 
                 return $this->project_controller->getAllProjects();
+            },
+            'addProject' => function ($params) {
+
+                return $this->project_controller->add_project($params);
+            },
+            'deleteProject' => function ($params) {
+                echo $params['projectId'];
+                return $this->project_controller->delete_project($params['projectId']);
             },
             'getProjectById' => function ($params) {
                 // return $this->project_controller->get_project_by_id($params['projectId']);

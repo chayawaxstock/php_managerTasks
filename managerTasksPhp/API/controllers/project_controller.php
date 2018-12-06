@@ -12,6 +12,16 @@ class project_controller {
 
         return $this->project_service->get_all_projects();
     }
+    function add_project($project)
+    {
+//        echo $project;
+       
+      return  $this->project_service->add_project($project);
+    }
+    function delete_project($projectId)
+    {
+         return $this->project_service->delete_project($projectId);
+    }
 
 //    function create_reports($report_id) {
 //        $viewName = "";
