@@ -13,45 +13,51 @@ class routes_loader {
     public function __construct() {
         $this->user_controller = new user_controller();
         $this->project_controller = new project_controller();
-        $this->department_controller = new department_controller();
-        $this->project_worker_controller = new projectworker_controller();
-        $this->presence_hours_controller = new presentday_controller();
+         $this->department_controller = new department_controller();
+        $this->project_worker_controller=new projectworker_controller();
+        $this->presence_hours_controller=new presenceday_controller();
 
-        $this->methods = array(
-            'user' => $this->get_users_methods(),
-            'project' => $this->get_projects_methods(),
-            'department' => $this->get_departments_methods(),
-            'projectworker' => $this->get_project_worker_methods(),
-            'presenceday' => $this->get_presence_day_methods()
+       $this->methods = array(
+        'user' => $this->get_users_methods(),
+        'project' => $this->get_projects_methods(),
+        'department' => $this->get_departments_methods(),
+        'projectworker' => $this->get_project_worker_methods(),
+	'presenceday'=>$this->get_presence_day_methods()
         );
     }
 
     function invoke($controller_name, $method_name, $params) {
-
         $data = $this->methods[$controller_name][$method_name]($params);
-        return json_encode($data);
+        echo json_encode($data);
     }
 
     function get_users_methods() {
         return array(
             'getAllUsers' => function ($params) {
-                // return $this->user_controller->get_all_users($params['managerId']);
+                return $this->user_controller->get_all_users();
             },
-            'getAllTeamUsers' => function ($params) {
-                // return $this->user_controller->get_all_team_users($params['teamLeaderId']);
+            'forgetPassword' => function ($params) {
+                return $this->user_controller->forgot_password($params['userName']);
             },
-            'getAllTeamLeaders' => function ($params) {
-                //  return $this->user_controller->get_all_team_leaders($params['managerId']);
+            'getHoursForUserProjects' => function ($params) {
+               return $this->user_controller->hours_user_done_projects($params['userId']);
             },
             'getUserById' => function ($params) {
-                // return $this->user_controller->get_user_by_id($params['userId']);
+               // return $this->user_controller->get_user_by_id($params['userId']);
             },
+	     'loginByPassword' => function ($params) {
+	         return $this->user_controller->login_by_password($params['password'],$params['userName']);
+	    },
             'deleteUser' => function ($params) {
                 return $this->user_controller->delete_user($params['userId']);
             },
-            'addUser' => function ($params) {
-                return $this->user_controller->add_user($params);
-            },
+	    'addUser' => function ($params) {
+	    return $this->user_controller->add_user($params);
+	    },
+	    
+            'loginByIp' => function ($params) {
+                return $this->user_controller->login_by_ip($params["ip"]);
+            }
         );
     }
 
@@ -70,22 +76,22 @@ class routes_loader {
                 return $this->project_controller->delete_project($params['projectId']);
             },
             'getProjectById' => function ($params) {
-                // return $this->project_controller->get_project_by_id($params['projectId']);
+               // return $this->project_controller->get_project_by_id($params['projectId']);
             },
             'getProjectsByTeamLeaderId' => function ($params) {
-                // return $this->project_controller->get_project_by_team_leader_id($params['teamLeaderId']);
+               // return $this->project_controller->get_project_by_team_leader_id($params['teamLeaderId']);
             },
             'getProjectsReports' => function () {
-                // return $this->project_controller->get_projects_reports();
+               // return $this->project_controller->get_projects_reports();
             }
         );
     }
 
+
     function get_departments_methods() {
         return array(
             'getAllDepartments' => function ($params) {
-
-                return $this->department_controller->getAllDepartments();
+              return $this->department_controller->get_all_departments();
             }
         );
     }
@@ -108,13 +114,15 @@ class routes_loader {
         );
     }
 
-    function get_presence_day_methods() {
+	function get_presence_day_methods() {
         return array(
-            'GetPresenceStatusPerWorkers' => function ($params) {
+            'updatePresenceDayWorker' => function ($params) {
 
-                // return $this->$presence_hours_controller->get_presence_status_per_workers($params['teamLeaderId']);
+              return $this->presence_hours_controller->update_presenceday_worker($params);
             }
         );
     }
 
 }
+
+

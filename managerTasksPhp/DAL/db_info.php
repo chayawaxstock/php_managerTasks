@@ -2,12 +2,10 @@
 
 $dbPassword = "1234";
 $dbUserName = "root";
-$dbServer = "localhost";
-$dbName = "managertasks";
+$dbServer = "127.0.0.1";
+$dbName = "managerTasks";
 
 $connection = new mysqli($dbServer, $dbUserName, $dbPassword, $dbName);
-
-//print_r($connection);
 
 if ($connection->connect_errno) {
     exit("Database Connection Failed. Reason: " . $connection->connect_error);

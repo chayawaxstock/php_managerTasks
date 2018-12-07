@@ -20,13 +20,23 @@ class db_access {
     static function run_scalar($query) {
         global $connection;
         $resultObj = $connection->query($query);
-        return mysqli_fetch_field($resultObj);
+        return array_values(get_object_vars($resultObj->fetch_object()))[0];
+        ;
     }
-
-    static function run_non_query($query) {
+    
+    
+   static function run_non_query($query) {
         global $connection;
         $resultObj = $connection->query($query);
-        return $connection->affected_rows;
+        return $connection;
+    } 
+
+    static function commit() {
+        mysql_query("COMMIT");
+    }
+
+    static function rollback() {
+        mysql_query("ROLLBACK");
     }
 
 }

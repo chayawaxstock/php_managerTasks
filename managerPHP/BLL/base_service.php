@@ -1,14 +1,14 @@
 <?php
 
-class base_service  {
+class base_service {
 
-    function init_user($user) {
+ function init_user($user) {
        // print_r($user);
         $new_user = array();
         $new_user['userId'] = $user['id'];
         $new_user['userName'] = $user['userName'];
         $new_user['email'] = $user['email'];
-        
+
         $new_user['numHoursWork'] = $user['numHourWork'];
         $new_user['managerId'] = $user['managerId'];
 
@@ -27,8 +27,35 @@ class base_service  {
         return $new_user;
     }
 
-    function init_project($model) {
-        echo 'init project';
+
+    function init_project($project) {
+//      print_r($project);
+          $new_project = array();
+        $new_project['projectId'] = $project['projectId'];
+        $new_project['projectName'] = $project['name'];
+        $new_project['customerName'] = $project['customerName'];
+        $new_project['numHourForProject'] = $project['numHour'];
+        $new_project['dateBegin'] = $project['dateBegin'];
+        $new_project['dateEnd'] = $project['dateEnd'];
+        $new_project['isFinish'] = $project['isFinish'];
+        $new_project['idManager'] = $project['managerId'];     
+        if (array_key_exists('userName', $project)) {
+            $new_project['manager'] = array();
+            $new_project['manager']['userName'] = $project['userName'];
+        }
+      
+        return $new_project;
+    }
+    
+     function init_worker_project($worker_project) {
+        $new_worker_project=array();
+        $new_worker_project['projectId']=$worker_project['projectId'];
+        $new_worker_project['userId']=$worker_project['name'];
+        $new_worker_project['projectName']=$worker_project['customerName'];
+        $new_worker_project['hoursForProject']=$worker_project['numHour'];
+        if(array_key_exists('dateBegin', $worker_project))
+        $new_worker_project['project']= $this->init_project ($worker_project);
+        return $new_worker_project;
     }
 
     function init_department($department) {
@@ -65,11 +92,11 @@ class base_service  {
        // $new_department_hours['department']['departmentName'] = $department_hours['department_name'];
        // return $new_department_hours;
     }
-    
-  
-    
-    
-   
+      function format_date($date, $format = 'Y-m-d') {
+          print_r($date);
+        $format_date = date($format, strtotime($date));
+        print_r( $format_date);
+        return "'$format_date'";
+    }
 
 }
-

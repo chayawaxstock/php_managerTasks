@@ -27,7 +27,6 @@ class user_controller {
     function get_user_by_id($user_id) {
        // return $this->user_service->get_user_by_id($user_id);
     }
-    
     function login_by_ip($ip) {
         return $this->user_service->login_by_ip($ip);
     }
@@ -37,8 +36,17 @@ class user_controller {
         return $this->user_service->forgot_password($user_name);
     }
     
+function add_user($user){
+ print_r($user) ;
+ return $this->user_service->add_user($user); }
+    
     function  hours_user_done_projects($user_id)
     {
         return $this->user_service->hours_done_user_by_projects($user_id);
+    }
+    
+    function  projects_user($user_id)
+    {
+        return $this->user_service->projects_user($user_id);
     }
 }

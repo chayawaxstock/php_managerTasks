@@ -1,17 +1,16 @@
 <?php
 
 class department_controller {
-     var $user_service;
+    
+     var $department_service;
 
     function __construct() {
-        $this->user_service = new user_service();
+        $this->department_service = new department_service();
     }
-
-    function getAllDepartments() {
-        return $this->user_service->get_all_departments();
+    
+      function get_all_departments() {
+        return $this->department_service->get_all_department();
     }
-
-   
-
 }
+
 

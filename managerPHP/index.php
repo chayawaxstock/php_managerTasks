@@ -3,9 +3,11 @@
 require './includes.php';
 
 header("Access-Control-Allow-Origin: *");
-header('Content-type: application/json');
+//header('Content-type: application/json');
+ 
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-
 $routes_loader = new routes_loader();
 
 $link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";

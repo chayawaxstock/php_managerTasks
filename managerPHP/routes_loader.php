@@ -42,12 +42,19 @@ class routes_loader {
             'getHoursForUserProjects' => function ($params) {
                return $this->user_controller->hours_user_done_projects($params['userId']);
             },
+	    'getProjectsByUserId' => function ($params) {
+	    return $this->user_controller->projects_user($params['userId']);
+	    },
             'getUserById' => function ($params) {
                // return $this->user_controller->get_user_by_id($params['userId']);
             },
              'loginByPassword' => function ($params) {
                 return $this->user_controller->login_by_password($params['password'],$params['userName']);
             },
+	    'addUser' => function ($params) {
+	    return $this->user_controller->add_user($params);
+	    },
+	    
             'loginByIp' => function ($params) {
                 return $this->user_controller->login_by_ip($params["ip"]);
             }
@@ -57,7 +64,16 @@ class routes_loader {
     function get_projects_methods() {
         return array(
             'getAllProjects' => function ($params) {
-               // return $this->project_controller->get_all_projects();
+
+                return $this->project_controller->getAllProjects();
+            },
+            'addProject' => function ($params) {
+
+                return $this->project_controller->add_project($params);
+            },
+            'deleteProject' => function ($params) {
+                echo $params['projectId'];
+                return $this->project_controller->delete_project($params['projectId']);
             },
             'getProjectById' => function ($params) {
                // return $this->project_controller->get_project_by_id($params['projectId']);
@@ -82,8 +98,18 @@ class routes_loader {
 
     function get_project_worker_methods() {
         return array(
-            'getAllWorkerHours' => function ($params) {
-              //  return $this->worker_hours_controller->getAllWorkerHours($params['workerId']);
+            'getWorkersNotInProject' => function ($params) {
+                return $this->project_worker_controller->get_workers_not_in_project($params['projectId']);
+            },
+            'getWorkersInProject' => function ($params) {
+                return $this->project_worker_controller->get_workers_in_project($params['projectId']);
+            },
+            'getUsersTeamLeaderProject' => function ($params) {
+
+                return $this->project_worker_controller->get_users_teamLeader_project($params['teamleaderId'], $params['projectId']);
+            },
+            'getSumStayByProjectAndDepartment' => function ($params) {
+                return $this->project_worker_controller->get_sum_stay_by_project_and_department($params['projectId']);
             }
         );
     }
