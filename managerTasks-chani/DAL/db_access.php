@@ -5,10 +5,9 @@ class db_access {
     static function run_reader($query, $init_model) {
 
         global $connection;
-        self::clearStoredResults();
+       self::clearStoredResults();
         $resultObj = $connection->query($query);
-
-
+       
         /* create one master array of the records */
         $list = array();
 

@@ -15,7 +15,7 @@ class presenceday_service {
     function add_present($pressantDay) {
         $date = date('Y-m-d H:i:s');
         $query = "INSERT INTO `managertasks`.`PresentDay`(`timeBegin`,`timeEnd`,`projectId`,`id`) VALUES('{$date}','{$date}',{$pressantDay['projectId']},{$pressantDay['userId']})";
-        return db_access::run_non_query($query);
+        return db_access::run_non_query($query)->affected_rows;
     }
 
 }

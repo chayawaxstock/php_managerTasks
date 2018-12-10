@@ -66,13 +66,14 @@ class projectworker_service extends base_service {
                 });
     }
 
-//    -------------not work------------
+
     function add_workers_to_project($projectId, $workers) {
+     
 
         foreach ($workers as $item) {
 
             $query = "INSERT INTO `managertasks`.`projectworker`(`projectId`,`hoursForProject`,`id`)VALUES( $projectId ,{$item['hoursForProject']},{$item['userId'] }); ";
-            return db_access::run_non_query($query);
+             db_access::run_non_query($query);
         }
     }
 

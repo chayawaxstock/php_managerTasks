@@ -13,16 +13,16 @@ class routes_loader {
     public function __construct() {
         $this->user_controller = new user_controller();
         $this->project_controller = new project_controller();
-         $this->department_controller = new department_controller();
-        $this->project_worker_controller=new projectworker_controller();
-        $this->presence_hours_controller=new presenceday_controller();
+        $this->department_controller = new department_controller();
+        $this->project_worker_controller = new projectworker_controller();
+        $this->presence_hours_controller = new presenceday_controller();
 
-       $this->methods = array(
-        'user' => $this->get_users_methods(),
-        'project' => $this->get_projects_methods(),
-        'department' => $this->get_departments_methods(),
-        'projectworker' => $this->get_project_worker_methods(),
-	'presenceday'=>$this->get_presence_day_methods()
+        $this->methods = array(
+            'user' => $this->get_users_methods(),
+            'project' => $this->get_projects_methods(),
+            'department' => $this->get_departments_methods(),
+            'projectworker' => $this->get_project_worker_methods(),
+            'presenceday' => $this->get_presence_day_methods()
         );
     }
 
@@ -57,6 +57,9 @@ class routes_loader {
             'loginByIp' => function ($params) {
                 return $this->user_controller->login_by_ip($params["ip"]);
             },
+	    'changePassword' => function ($params) {
+	        return $this->user_controller->change_password($params["requestId"],$params["user"]);
+	     },
             'sendMessageToManagers'=> function ($params) {
                 return $this->user_controller->send_email_manager($params["userId"],$params["subject"],$params["body"]);
             }
@@ -83,9 +86,9 @@ class routes_loader {
                 return $this->project_controller->get_projects_by_teamLeader($params['teamLeaderId']);
             },
             'createReports' => function ($param) {
-                if($param['idReport']==1)
-                 return $this->project_controller->create_project_report();
-             return  $this->user_controller->create_workers_report();
+                if ($param['idReport'] == 1)
+                    return $this->project_controller->create_project_report();
+                return $this->user_controller->create_workers_report();
             },
             'getProjectsManager' => function ($param) {
                 return $this->project_controller->get_projects_by_teamLeader($param['teamLeaderId']);
@@ -125,7 +128,7 @@ class routes_loader {
             'getUsersBelongProject' => function ($params) {
                 return $this->project_worker_controller->get_users_belong_project($params['projectId']);
             }
-            ,'getSumHoursDoneForUsers' => function ($params) {
+            , 'getSumHoursDoneForUsers' => function ($params) {
                 return $this->project_worker_controller->get_sum_hours_done_users($params['projectId'], $params['teamLeaderId']);
             },
             'addWorkersToProject' => function ($params) {
@@ -142,6 +145,7 @@ class routes_loader {
     function get_presence_day_methods() {
         return array(
             'updatePresenceDayWorker' => function ($params) {
+
                 return $this->presence_hours_controller->update_presenceday_worker($params);
             }
             ,

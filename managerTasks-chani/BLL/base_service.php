@@ -13,19 +13,19 @@ class base_service {
 
         if (array_key_exists('department', $user)) {
             $new_user['departmentUser'] = array();
-            $new_user['departmentUser']['id'] = $user['department_id'];
+            if(array_key_exists('department_id', $user))
+              $new_user['departmentUser']['id'] = $user['department_id'];
             $new_user['departmentUser']['department'] = $user['department'];
         }
         if (array_key_exists('managerUserName', $user)) {
-           $new_user['manager'] = array();
-           $new_user['manager']['userId'] = $user['managerId'];
-           $new_user['manager']['userName'] = $user['managerUserName'];
-           $new_user['manager']['email'] = $user['managerEmail'];
-           $new_user['manager']['numHoursWork'] = $user['managerNumHourWork'];
+            $new_user['manager'] = array();
+            $new_user['manager']['userId'] = $user['managerId'];
+            $new_user['manager']['userName'] = $user['managerUserName'];
+            $new_user['manager']['email'] = $user['managerEmail'];
+            $new_user['manager']['numHoursWork'] = $user['managerNumHourWork'];
         }
         return $new_user;
     }
-
 
     function init_project($project) {
 //      print_r($project);
@@ -37,27 +37,27 @@ class base_service {
         $new_project['dateBegin'] = $project['dateBegin'];
         $new_project['dateEnd'] = $project['dateEnd'];
         $new_project['isFinish'] = $project['isFinish'];
-        $new_project['idManager'] = $project['managerId'];     
+        $new_project['idManager'] = $project['managerId'];
         if (array_key_exists('userName', $project)) {
             $new_project['manager'] = array();
             $new_project['manager']['userName'] = $project['userName'];
         }
-      
+
         return $new_project;
     }
-    
-     function init_worker_project($worker_project) {
-        $new_worker_project=array();
-        $new_worker_project['projectId']=$worker_project['projectId'];
-        $new_worker_project['userId']=$worker_project['id'];
-        $new_worker_project['projectName']=$worker_project['customerName'];
-        $new_worker_project['hoursForProject']=$worker_project['hoursForProject'];
-        if(array_key_exists('sumHoursDone', $worker_project))
-              $new_worker_project['sumHoursDone']=$worker_project['sumHoursDone'];  
-        if(array_key_exists('dateBegin', $worker_project))
-        $new_worker_project['project']= $this->init_project ($worker_project);
-        if(array_key_exists('userName',$worker_project)){
-            $new_worker_project['user']= $this->init_user($worker_project);
+
+    function init_worker_project($worker_project) {
+        $new_worker_project = array();
+        $new_worker_project['projectId'] = $worker_project['projectId'];
+        $new_worker_project['userId'] = $worker_project['id'];
+        $new_worker_project['projectName'] = $worker_project['customerName'];
+        $new_worker_project['hoursForProject'] = $worker_project['hoursForProject'];
+        if (array_key_exists('sumHoursDone', $worker_project))
+            $new_worker_project['sumHoursDone'] = $worker_project['sumHoursDone'];
+        if (array_key_exists('dateBegin', $worker_project))
+            $new_worker_project['project'] = $this->init_project($worker_project);
+        if (array_key_exists('userName', $worker_project)) {
+            $new_worker_project['user'] = $this->init_user($worker_project);
         }
         return $new_worker_project;
     }
@@ -67,23 +67,6 @@ class base_service {
         $new_department['id'] = $department['id'];
         $new_department['department'] = $department['department'];
         return $new_department;
-    }
-
-    function init_worker_hours($worker_hours) {
-       // $new_worker_hours = array();
-       // $new_worker_hours['workerHoursId'] = $worker_hours['worker_hours_id'];
-       // $new_worker_hours['projectId'] = $worker_hours['project_id'];
-      //  $new_worker_hours['workerId'] = $worker_hours['worker_id'];
-      //  $new_worker_hours['numHours'] = $worker_hours['num_hours'];
-      //  $new_worker_hours['isComplete'] = $worker_hours['is_complete'];
-      //  $new_worker_hours['project'] = array();
-      //  $new_worker_hours['project']['projectName'] = $worker_hours['project_name'];
-      //  $new_worker_hours['worker'] = array();
-      //  $new_worker_hours['worker']['userName'] = $worker_hours['user_name'];
-       // $new_worker_hours['worker']['email'] = $worker_hours['email'];
-       // $new_worker_hours['worker']['department'] = array();
-       // $new_worker_hours['worker']['department']['departmentName'] = $worker_hours['department_name'];
-       // return $new_worker_hours;
     }
 
     function init_department_hours($department_hours) {
@@ -98,9 +81,8 @@ class base_service {
         $new_department_hours['departmentUser']['department'] = $department_hours['department'];
         return $new_department_hours;
     }
-    
-    function init_report($project_report)
-    {
+
+    function init_report($project_report) {
 
         $new_report=array();
         $new_report['id']=$project_report['projectId'];
@@ -116,54 +98,63 @@ class base_service {
         $new_report['teamLeader']=$project_report['userName'];
         return $new_report;
     }
-    
-    
-    function init_project_department_report($project_department)
-    {
-        $new_project_department=array();
-        $new_project_department['id']=$project_department['id'];
-        $new_project_department['name']=$project_department['department'];
-        $new_project_department['totalHours']=$project_department['sumHours'];
-        $new_project_department['sumHoursDo']=$project_department['sumHoursUser'];
-        $new_project_department['precentsDone']=$project_department['precentsDone'];
+
+    function init_project_department_report($project_department) {
+        $new_project_department = array();
+        $new_project_department['id'] = $project_department['id'];
+        $new_project_department['name'] = $project_department['department'];
+        $new_project_department['totalHours'] = $project_department['sumHours'];
+        $new_project_department['sumHoursDo'] = $project_department['sumHoursUser'];
+        $new_project_department['precentsDone'] = $project_department['precentsDone'];
         return $new_project_department;
     }
-   
-    function init_workers_project_report($workers_project_report)
-    {
-        $new_workers_project_report=array();
-        $new_workers_project_report['id']=$workers_project_report['id'];
-        $new_workers_project_report['name']=$workers_project_report['userName'];
-        $new_workers_project_report['totalHours']=$workers_project_report['TotalHours'];
-        $new_workers_project_report['sumHoursDo']=$workers_project_report['sumHours'];
-        $new_workers_project_report['precentsDone']=$workers_project_report['precentDone'];
+
+    function init_workers_project_report($workers_project_report) {
+        $new_workers_project_report = array();
+        $new_workers_project_report['id'] = $workers_project_report['id'];
+        $new_workers_project_report['name'] = $workers_project_report['userName'];
+        $new_workers_project_report['totalHours'] = $workers_project_report['TotalHours'];
+        $new_workers_project_report['sumHoursDo'] = $workers_project_report['sumHours'];
+        $new_workers_project_report['precentsDone'] = $workers_project_report['precentDone'];
         return $new_workers_project_report;
+    }
+
+    function init_worker_report($worker_report) {
+        $new_workers_project_report = array();
+        $new_workers_project_report['id'] = $worker_report['id'];
+        $new_workers_project_report['name'] = $worker_report['userName'];
+        $new_workers_project_report['totalHours'] = $worker_report['numHourWork*5*4'];
+        return $new_workers_project_report;
+    }
+
+    function init_worker_details_report($worker_details) {
+        $new_workers_project_report = array();
+        $new_workers_project_report['year'] = $worker_details['year'];
+        $new_workers_project_report['month'] = $worker_details['month'];
+        $new_workers_project_report['name'] = $worker_details['name'];
+        $new_workers_project_report['totalHours'] = $worker_details['totalHours'];
+        $new_workers_project_report['sumHoursDo'] = $worker_details['hourDo'];
+        $new_workers_project_report['sumHoursDoMonth'] = $worker_details['doingMonth'];
+        return $new_workers_project_report;
+    }
+
+   
+
+    function format_date($date, $format = 'Y-m-d') {
+     
+        $format_date = date($format, strtotime($date));
+      
+        return "'$format_date'";
     }
     
-    function init_worker_report($worker_report)
+    function send_email($to,$from,$subject,$body)
     {
-        $new_workers_project_report=array();
-        $new_workers_project_report['id']=$worker_report['id'];
-        $new_workers_project_report['name']=$worker_report['userName'];
-        $new_workers_project_report['totalHours']=$worker_report['numHourWork*5*4'];
-        return $new_workers_project_report;
-    }
-            
-    function init_worker_details_report($worker_details)
-    {
-        $new_workers_project_report=array();
-        $new_workers_project_report['year']=$worker_details['year'];
-        $new_workers_project_report['month']=$worker_details['month'];
-        $new_workers_project_report['name']=$worker_details['name'];
-        $new_workers_project_report['totalHours']=$worker_details['totalHours'];
-        $new_workers_project_report['sumHoursDo']=$worker_details['hourDo'];
-        $new_workers_project_report['sumHoursDoMonth']=$worker_details['doingMonth'];    
-        return $new_workers_project_report;
-    }
-            
-      function format_date($date, $format = 'Y-m-d') {
-        $format_date = date($format, strtotime($date));
-        return "'$format_date'";
+        $headers = "From: " .$from . "\r\n";
+        $headers .= "Reply-To: ". $from . "\r\n";
+        $headers .= "CC: susan@example.com\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+           return mail($to, $subject, $body,$headers);
     }
 
 }

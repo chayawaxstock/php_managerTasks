@@ -2,7 +2,7 @@
 
 //ROUTER
 require './routes_loader.php';
-
+require './BLL/validation.php';
 //API
 require './API/controllers/department_controller.php';
 require './API/controllers/presenceday_controller.php';
@@ -17,7 +17,7 @@ require './BLL/projectworker_service.php';
 require './BLL/project_service.php';
 require './BLL/presenceday_service.php';
 require './BLL/department_service.php';
-//require './BLL/send_email_service.php';
+
 
 //DAL
 require './DAL/db_access.php';

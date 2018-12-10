@@ -57,10 +57,12 @@ class routes_loader {
             'loginByIp' => function ($params) {
                 return $this->user_controller->login_by_ip($params["ip"]);
             },
-            'changePassword' => function ($params) {
-
-                return $this->user_controller->change_password($params["requestId"],$params["user"]);
-            },
+	    'changePassword' => function ($params) {
+	        return $this->user_controller->change_password($params["requestId"],$params["user"]);
+	     },
+            'sendMessageToManagers'=> function ($params) {
+                return $this->user_controller->send_email_manager($params["userId"],$params["subject"],$params["body"]);
+            }
         );
     }
 
@@ -147,8 +149,7 @@ class routes_loader {
                 return $this->presence_hours_controller->update_presenceday_worker($params);
             }
             ,
-            'AddPresent' => function ($params) {
-
+            'addPresent' => function ($params) {
                 return $this->presence_hours_controller->add_present($params);
             }
         );

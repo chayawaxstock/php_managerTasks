@@ -14,16 +14,16 @@ class db_access {
         while ($singleRowFromQuery = $resultObj->fetch_array(MYSQLI_ASSOC)) {
             $list[] = $init_model($singleRowFromQuery);
         }
-        
-        $resultObj->close();
+         $resultObj->close();
         return $list;
+
     }
 
     static function run_scalar($query) {
         global $connection;
         $resultObj = $connection->query($query);
-        return array_values(get_object_vars($resultObj->fetch_object()))[0];
-        ;
+        return array_values(get_object_vars($resultObj->fetch_object()));
+   
     }
     
     
@@ -36,15 +36,6 @@ class db_access {
     static function clearStoredResults(){
     global $connection;
 
-    do {
-         if ($res = $connection->store_result()) {
-           $res->free();
-         }
-        } while ($connection->more_results() && $connection->next_result());        
-}
-
- static function clearQuery(){
-    global $connection;
     do {
          if ($res = $connection->store_result()) {
            $res->free();

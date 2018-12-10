@@ -2,13 +2,12 @@
 
 class base_service {
 
-    function init_user($user) {
-        // print_r($user);
+ function init_user($user) {
         $new_user = array();
         $new_user['userId'] = $user['id'];
         $new_user['userName'] = $user['userName'];
         $new_user['email'] = $user['email'];
-        $new_user['departmentId'] = $user['departmentUserId'];
+        $new_user['departmentId']=$user['departmentUserId'];
         $new_user['numHoursWork'] = $user['numHourWork'];
         $new_user['managerId'] = $user['managerId'];
 
@@ -30,7 +29,7 @@ class base_service {
 
     function init_project($project) {
 //      print_r($project);
-        $new_project = array();
+          $new_project = array();
         $new_project['projectId'] = $project['projectId'];
         $new_project['projectName'] = $project['name'];
         $new_project['customerName'] = $project['customerName'];
@@ -76,8 +75,8 @@ class base_service {
         $new_department_hours['projectId'] = $department_hours['projectId'];
         $new_department_hours['departmentId'] = $department_hours['departmentId'];
         $new_department_hours['sumHours'] = $department_hours['sumHours'];
-
-        $new_department_hours['departmentUser'] = array();
+      
+        $new_department_hours['departmentUser'] = array(); 
         $new_department_hours['departmentUser']['id'] = $department_hours['id'];
         $new_department_hours['departmentUser']['department'] = $department_hours['department'];
         return $new_department_hours;
@@ -85,18 +84,18 @@ class base_service {
 
     function init_report($project_report) {
 
-        $new_report = array();
-        $new_report['id'] = $project_report['projectId'];
-        $new_report['name'] = $project_report['name'];
-        $new_report['customerName'] = $project_report['customerName'];
-        $new_report['dateBegin'] = $project_report['dateBegin'];
-        $new_report['dateEnd'] = $project_report['dateEnd'];
-        $new_report['totalHours'] = $project_report['numHour'];
-        $new_report['sumHoursDo'] = $project_report['sumHourDo'];
-        $new_report['precentsDone'] = $project_report['presentDoing'];
-        $new_report['daysleft'] = $project_report['numDaysStay'];
-        $new_report['isFinish'] = $project_report['isFinish'];
-        $new_report['teamLeader'] = $project_report['userName'];
+        $new_report=array();
+        $new_report['id']=$project_report['projectId'];
+        $new_report['name']=$project_report['name'];
+        $new_report['customerName']=$project_report['customerName'];
+        $new_report['dateBegin']=$project_report['dateBegin'];
+        $new_report['dateEnd']=$project_report['dateEnd'];
+        $new_report['totalHours']=$project_report['numHour'];
+        $new_report['sumHoursDo']=$project_report['sumHourDo'];
+        $new_report['precentsDone']=$project_report['presentDoing'];
+        $new_report['daysleft']=$project_report['numDaysStay'];
+        $new_report['isFinish']=$project_report['isFinish'];
+        $new_report['teamLeader']=$project_report['userName'];
         return $new_report;
     }
 
@@ -142,9 +141,9 @@ class base_service {
    
 
     function format_date($date, $format = 'Y-m-d') {
-        print_r($date);
+     
         $format_date = date($format, strtotime($date));
-        print_r($format_date);
+      
         return "'$format_date'";
     }
     

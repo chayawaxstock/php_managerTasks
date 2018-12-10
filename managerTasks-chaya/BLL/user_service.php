@@ -177,6 +177,17 @@ class user_service extends base_service {
         $query = "CALL `managertasks`.`reportWorker`({$worker_id})";
         return $this->get_workers_details_report($query);
     }
+        function change_password($requestId,$user){
+	          $query="select count(*) as result from requestpassword where idRequest={$requestId} and userName='{$user['userName']}' and  NOW()>dateCreate and NOW()<dateExpirence and isUse=false";
+		          $result = db_access::run_scalar($query);
+			  if ($result[0])
+			   {  $query = " UPDATE `managertasks`.`user`SET`password` = '{$user['password']}' WHERE `userName` = '{$user['userName']}'";
+			  return db_access::run_non_query($query)->affected_rows;
+			   $query = " UPDATE `managertasks`.`user`SET`password` = '{$user['password']}' WHERE `userName` = '{$user['userName']}'";
+                return db_access::run_non_query($query)->affected_rows;
+            }
+                }
+      }
     
     function send_email_manager($user_id,$subject,$body)
     {   

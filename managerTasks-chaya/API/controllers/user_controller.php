@@ -7,8 +7,11 @@ class user_controller extends validation {
     function __construct() {
         $this->user_service = new user_service();
     }
-    
-    
+
+    function login_by_password($password,$user_name){
+	return $this->user_service->login_by_password($user_name,$password);
+    }
+
     function get_all_users() {
         return $this->user_service->get_all_users();
     }
@@ -53,27 +56,25 @@ class user_controller extends validation {
     function get_users_by_department($department_name) {
         return $this->user_service->get_users_by_department($department_name);
     }
-
-
-    function update_user($params) {
-        //  if ($this->validation_text($user['userName'], "", 2, 15, 'userName'))
-         //   return http_response_code(422);
-       // if ($this->validation_text($project['password'], "", 8, 16, 'password'))
-          //  return http_response_code(422);
-       // if ($this->validation_int($project['numHoursWork'], 'numHourForProject', 6, 9))
-         //   return http_response_code(422);
-      //  if ($this->validation_email($user['email'], 'email'))
-         //   return http_response_code(422);
+    function  update_user($params)
+    {
         return $this->user_service->update_user($params);
     }
-
-    function create_workers_report() {
+    
+    function create_workers_report()
+    {
         return $this->user_service->create_workers_report();
     }
-    
-    function send_email_manager($user_id,$subject,$body)
+     function send_email_manager($user_id,$subject,$body)
     {
         return $this->user_service->send_email_manager($user_id,$subject,$body);
     }
 
+
+    function change_password($requestId,$user){
+
+        return$this->user_service->change_password($requestId,$user);
+    }
+    
+    
 }

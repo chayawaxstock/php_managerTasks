@@ -1,8 +1,8 @@
 <?php
 
-class presenceday_controller
-{
-     var $presenceday_service;
+class presenceday_controller {
+
+    var $presenceday_service;
 
     function __construct() {
         $this->presenceday_service = new presenceday_service();
