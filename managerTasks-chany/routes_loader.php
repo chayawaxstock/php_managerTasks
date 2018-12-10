@@ -13,21 +13,20 @@ class routes_loader {
     public function __construct() {
         $this->user_controller = new user_controller();
         $this->project_controller = new project_controller();
-        $this->department_controller = new department_controller();
-        $this->project_worker_controller = new projectworker_controller();
-        $this->presence_hours_controller = new presenceday_controller();
+         $this->department_controller = new department_controller();
+        $this->project_worker_controller=new projectworker_controller();
+        $this->presence_hours_controller=new presenceday_controller();
 
-        $this->methods = array(
-            'user' => $this->get_users_methods(),
-            'project' => $this->get_projects_methods(),
-            'department' => $this->get_departments_methods(),
-            'projectworker' => $this->get_project_worker_methods(),
-            'presenceday' => $this->get_presence_day_methods()
+       $this->methods = array(
+        'user' => $this->get_users_methods(),
+        'project' => $this->get_projects_methods(),
+        'department' => $this->get_departments_methods(),
+        'projectworker' => $this->get_project_worker_methods(),
+	'presenceday'=>$this->get_presence_day_methods()
         );
     }
 
     function invoke($controller_name, $method_name, $params) {
-
         $data = $this->methods[$controller_name][$method_name]($params);
         return json_encode($data);
     }
@@ -58,7 +57,6 @@ class routes_loader {
             'loginByIp' => function ($params) {
                 return $this->user_controller->login_by_ip($params["ip"]);
             }
-                ,
         );
     }
 
@@ -79,10 +77,12 @@ class routes_loader {
                 // return $this->project_controller->get_project_by_id($params['projectId']);
             },
             'getProjectsByTeamLeaderId' => function ($params) {
-                // return $this->project_controller->get_project_by_team_leader_id($params['teamLeaderId']);
+                return $this->project_controller->get_projects_by_teamLeader($params['teamLeaderId']);
             },
-            'getProjectsReports' => function () {
-                // return $this->project_controller->get_projects_reports();
+            'createReports' => function ($param) {
+                if($param['idReport']==1)
+                 return $this->project_controller->create_project_report();
+             return  $this->user_controller->create_workers_report();
             },
             'getProjectsManager' => function ($param) {
                 return $this->project_controller->get_projects_by_teamLeader($param['teamLeaderId']);

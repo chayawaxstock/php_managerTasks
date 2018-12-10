@@ -9,7 +9,6 @@ class project_controller {
     }
 
     function get_all_projects() {
-
         return $this->project_service->get_all_projects();
     }
     function add_project($project)
@@ -31,6 +30,11 @@ class project_controller {
     function update_project($params)
     {
         return $this->project_service->update_project($params);
+    }
+    
+    function create_project_report()
+    {
+        return $this->project_service->create_report_project();
     }
 
 }

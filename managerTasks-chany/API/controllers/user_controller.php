@@ -55,6 +55,11 @@ function add_user($user){
     {
         return $this->user_service->update_user($params);
     }
-   
-   
+    
+    function create_workers_report()
+    {
+        return $this->user_service->create_workers_report();
+    }
+    
+    
 }

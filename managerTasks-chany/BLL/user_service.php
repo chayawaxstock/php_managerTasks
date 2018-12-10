@@ -16,6 +16,22 @@ class user_service extends base_service {
                 });
         return $users;
     }
+    
+    function get_workers_report($query)
+    {
+           $workers = db_access:: run_reader($query, function ($model) {
+                    return $this->init_worker_report($model);
+                });
+        return $workers;
+    }
+    
+      function get_workers_details_report($query)
+    {
+           $workers = db_access:: run_reader($query, function ($model) {
+                    return $this->init_worker_details_report($model);
+                });
+        return $workers;
+    }
 
     //good
     function get_all_users() {
@@ -138,10 +154,11 @@ class user_service extends base_service {
                     return $model;
                 });
     }
-
-    function get_users_by_department($department_name) {
-        $query = "SELECT u.*,d.id as department_id,d.department FROM managertasks.user u JOIN managertasks.department d  ON u.departmentUserId=d.id WHERE d.department='$department_name'";
-        return $this->get_users($query);
+    
+    function  get_users_by_department($department_name)
+    {
+        $query="SELECT u.*,d.id as department_id,d.department FROM managertasks.user u JOIN managertasks.department d  ON u.departmentUserId=d.id WHERE d.department='$department_name'";
+         return $this->get_users($query);
     }
 
     function update_user($params) {

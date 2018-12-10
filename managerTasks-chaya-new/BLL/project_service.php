@@ -9,6 +9,17 @@ class project_service extends base_service {
 
         return $projects;
     }
+    function get_hours_departments($query) {
+    $departments_projects = db_access:: run_reader($query, function ($model) {
+    return $this->init_department_hours($model);
+    });
+    return $departments_projects;
+    }
+    
+    
+    
+    
+    
     
     function get_project_report($query)
     {

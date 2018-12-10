@@ -5,7 +5,7 @@ class db_access {
     static function run_reader($query, $init_model) {
 
         global $connection;
-
+        self::clearStoredResults();
         $resultObj = $connection->query($query);
 
 
@@ -16,6 +16,7 @@ class db_access {
             $list[] = $init_model($singleRowFromQuery);
         }
         return $list;
+
     }
 
     static function run_scalar($query) {
@@ -32,12 +33,14 @@ class db_access {
         return $connection;
     } 
 
-    static function commit() {
-        mysql_query("COMMIT");
-    }
+    static function clearStoredResults(){
+    global $connection;
 
-    static function rollback() {
-        mysql_query("ROLLBACK");
-    }
+    do {
+         if ($res = $connection->store_result()) {
+           $res->free();
+         }
+        } while ($connection->more_results() && $connection->next_result());        
+}
 
 }

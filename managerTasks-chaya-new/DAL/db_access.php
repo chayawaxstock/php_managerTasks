@@ -7,9 +7,11 @@ class db_access {
         global $connection;
         self::clearStoredResults();
         $resultObj = $connection->query($query);
-     
+
+
         /* create one master array of the records */
         $list = array();
+
         while ($singleRowFromQuery = $resultObj->fetch_array(MYSQLI_ASSOC)) {
             $list[] = $init_model($singleRowFromQuery);
         }

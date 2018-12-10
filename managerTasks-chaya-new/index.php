@@ -18,6 +18,7 @@ $method_name=$exploded_path[count($exploded_path) - 1];
 
 date_default_timezone_set('Asia/Jerusalem');
 
+
 $type=$_SERVER['REQUEST_METHOD'];
 if($type == 'GET'||$type == 'DELETE')
     $params=$_GET;
@@ -25,10 +26,16 @@ else if($type=='POST'||$type=='PUT')
 {
     $json = file_get_contents('php://input');
     $params = json_decode($json, true);
-   // if(isset($_GET))
-      //  $params=$params+$_GET;
+
+//    print_r($_REQUEST);
+   if($_GET)
+   {   
+     $params=$params+$_GET;
+   }
 }
+
 
 echo $routes_loader->invoke($controller_name,$method_name,$params);
 
 die();
+

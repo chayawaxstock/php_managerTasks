@@ -50,7 +50,7 @@ class base_service {
      function init_worker_project($worker_project) {
         $new_worker_project=array();
         $new_worker_project['projectId']=$worker_project['projectId'];
-        $new_worker_project['userId']=$worker_project['name'];
+        $new_worker_project['userId']=$worker_project['id'];
         $new_worker_project['projectName']=$worker_project['customerName'];
         $new_worker_project['hoursForProject']=$worker_project['hoursForProject'];
         if(array_key_exists('sumHoursDone', $worker_project))
@@ -88,6 +88,7 @@ class base_service {
     }
 
     function init_department_hours($department_hours) {
+
         $new_department_hours = array();
         $new_department_hours['projectId'] = $department_hours['projectId'];
         $new_department_hours['departmentId'] = $department_hours['departmentId'];

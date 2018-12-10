@@ -37,5 +37,11 @@ class projectworker_controller {
      {
          return $this->projectworker_service->get_sum_hours_done_users($project_id,$team_leader_id);
      }
+     function add_workers_to_project($projectId,$workers){
+       return $this->projectworker_service->add_workers_to_project($projectId,$workers);  
+     }
+     function update_project_hours_for_user($worker){
+          return $this->projectworker_service->update_project_hours_for_user($worker);  
+     }
 
 }
