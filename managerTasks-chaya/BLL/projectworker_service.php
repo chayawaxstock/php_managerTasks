@@ -54,7 +54,7 @@ class projectworker_service extends base_service {
     
     function get_users_belong_project($project_id)
     {
-        $query="SELECT * FROM project p JOIN projectworker pw ON  p.projectId =pw.projectId JOIN user u ON pw.id =u.id WHERE pw.projectId={projectId} AND pw.isActive=true";
+        $query="SELECT * FROM project p JOIN projectworker pw ON  p.projectId =pw.projectId JOIN user u ON pw.id =u.id WHERE pw.projectId=$project_id AND pw.isActive=true";
         return $this->get_workers_projects($query);
     }
     
