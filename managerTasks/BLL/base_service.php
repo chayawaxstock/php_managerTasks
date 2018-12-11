@@ -27,6 +27,7 @@ class base_service {
         return $new_user;
     }
 
+
     function init_project($project) {
 //      print_r($project);
           $new_project = array();
@@ -69,6 +70,7 @@ class base_service {
         return $new_department;
     }
 
+
     function init_department_hours($department_hours) {
 
         $new_department_hours = array();
@@ -81,8 +83,9 @@ class base_service {
         $new_department_hours['departmentUser']['department'] = $department_hours['department'];
         return $new_department_hours;
     }
-
-    function init_report($project_report) {
+    
+    function init_report($project_report)
+    {
 
         $new_report=array();
         $new_report['id']=$project_report['projectId'];
@@ -98,24 +101,27 @@ class base_service {
         $new_report['teamLeader']=$project_report['userName'];
         return $new_report;
     }
-
-    function init_project_department_report($project_department) {
-        $new_project_department = array();
-        $new_project_department['id'] = $project_department['id'];
-        $new_project_department['name'] = $project_department['department'];
-        $new_project_department['totalHours'] = $project_department['sumHours'];
-        $new_project_department['sumHoursDo'] = $project_department['sumHoursUser'];
-        $new_project_department['precentsDone'] = $project_department['precentsDone'];
+    
+    
+    function init_project_department_report($project_department)
+    {
+        $new_project_department=array();
+        $new_project_department['id']=$project_department['id'];
+        $new_project_department['name']=$project_department['department'];
+        $new_project_department['totalHours']=$project_department['sumHours'];
+        $new_project_department['sumHoursDo']=$project_department['sumHoursDone'];
+        $new_project_department['precentsDone']=$project_department['precentsDone'];
         return $new_project_department;
     }
-
-    function init_workers_project_report($workers_project_report) {
-        $new_workers_project_report = array();
-        $new_workers_project_report['id'] = $workers_project_report['id'];
-        $new_workers_project_report['name'] = $workers_project_report['userName'];
-        $new_workers_project_report['totalHours'] = $workers_project_report['TotalHours'];
-        $new_workers_project_report['sumHoursDo'] = $workers_project_report['sumHours'];
-        $new_workers_project_report['precentsDone'] = $workers_project_report['precentDone'];
+   
+    function init_workers_project_report($workers_project_report)
+    {
+        $new_workers_project_report=array();
+        $new_workers_project_report['id']=$workers_project_report['id'];
+        $new_workers_project_report['name']=$workers_project_report['userName'];
+        $new_workers_project_report['totalHours']=$workers_project_report['TotalHours'];
+        $new_workers_project_report['sumHoursDo']=$workers_project_report['sumHours'];
+        $new_workers_project_report['precentsDone']=$workers_project_report['precentDone'];
         return $new_workers_project_report;
     }
 
@@ -126,24 +132,21 @@ class base_service {
         $new_workers_project_report['totalHours'] = $worker_report['numHourWork*5*4'];
         return $new_workers_project_report;
     }
-
-    function init_worker_details_report($worker_details) {
-        $new_workers_project_report = array();
-        $new_workers_project_report['year'] = $worker_details['year'];
-        $new_workers_project_report['month'] = $worker_details['month'];
-        $new_workers_project_report['name'] = $worker_details['name'];
-        $new_workers_project_report['totalHours'] = $worker_details['totalHours'];
-        $new_workers_project_report['sumHoursDo'] = $worker_details['hourDo'];
-        $new_workers_project_report['sumHoursDoMonth'] = $worker_details['doingMonth'];
+            
+    function init_worker_details_report($worker_details)
+    {
+        $new_workers_project_report=array();
+        $new_workers_project_report['year']=$worker_details['year'];
+        $new_workers_project_report['month']=$worker_details['month'];
+        $new_workers_project_report['name']=$worker_details['name'];
+        $new_workers_project_report['totalHours']=$worker_details['totalHours'];
+        $new_workers_project_report['sumHoursDo']=$worker_details['hourDo'];
+        $new_workers_project_report['sumHoursDoMonth']=$worker_details['doingMonth'];    
         return $new_workers_project_report;
     }
-
-   
-
-    function format_date($date, $format = 'Y-m-d') {
-     
+            
+      function format_date($date, $format = 'Y-m-d') {
         $format_date = date($format, strtotime($date));
-      
         return "'$format_date'";
     }
     

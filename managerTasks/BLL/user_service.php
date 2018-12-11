@@ -42,10 +42,18 @@ class user_service extends base_service {
         return $this->get_users($query);
     }
 
-    function login_by_password($user_name, $password) {
+    function login_by_password($params) {
 
-        $query = "SELECT u.*,d.id as department_id,d.department FROM managertasks.user u JOIN managertasks.department d ON u.departmentUserId=d.id WHERE password='$password' AND userName='$user_name'";
-        return $this->get_users($query)[0];
+        $query = "SELECT u.*,d.id as department_id,d.department FROM managertasks.user u JOIN managertasks.department d ON u.departmentUserId=d.id WHERE password='{$params['password']}' AND userName='{$params['userName']}'";
+        $result= $this->get_users($query)[0];
+        
+        if($result&&$params['ip']!='')
+        {
+             $query = "UPDATE `managertasks`.`user`SET`userComputer` = '{$params['ip']}' WHERE password = '{$params['password']}' ";
+            
+             $rows =  db_access::run_non_query($query);
+        }
+        return $result;
     }
 
     function forget_password($user_name) {
@@ -112,7 +120,8 @@ class user_service extends base_service {
     }
 
     function login_by_ip($ip) {
-        $query = "SELECT* FROM managertasks.user JOIN managertasks.department ON user.departmentUserId = department.id  WHERE userComputer = '$ip'";
+
+        $query = "SELECT u.*,d.id as department_id,d.department FROM managertasks.user u JOIN managertasks.department d ON u.departmentUserId=d.id WHERE userComputer = '$ip'";
         return $this->get_users($query)[0];
     }
 
@@ -187,7 +196,7 @@ class user_service extends base_service {
                 return db_access::run_non_query($query)->affected_rows;
             }
                 }
-      }
+     
     
     function send_email_manager($user_id,$subject,$body)
     {   
@@ -208,4 +217,4 @@ class user_service extends base_service {
         return $this->get_users($query)[0];
     }
     
-}
+ }

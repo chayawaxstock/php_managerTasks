@@ -93,8 +93,8 @@ class routes_loader {
             'getProjectsManager' => function ($param) {
                 return $this->project_controller->get_projects_by_teamLeader($param['teamLeaderId']);
             }
-            , 'updateProject' => function ($param) {
-                return $this->project_controller->get_projects_by_teamLeader($param['teamLeaderId']);
+            ,'updateProject' => function ($param) {
+                return $this->project_controller->update_project($param['project']);
             }
         );
     }

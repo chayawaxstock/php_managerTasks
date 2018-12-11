@@ -54,13 +54,13 @@ class projectworker_service extends base_service {
     
     function get_users_belong_project($project_id)
     {
-        $query="SELECT * FROM project p JOIN projectworker pw ON  p.projectId =pw.projectId JOIN user u ON pw.id =u.id WHERE pw.projectId=$project_id AND pw.isActive=true";
+        $query="SELECT * FROM project p JOIN projectworker pw ON  p.projectId =pw.projectId JOIN user u ON pw.id =u.id WHERE pw.projectId={$project_id} AND pw.isActive=true";
         return $this->get_workers_projects($query);
     }
     
      function get_sum_hours_done_users($project_id,$team_leader_id)
     {
-        $query="SELECT sum(sumHours),u.userName FROM presentday p JOIN user u on u.id= p.id WHERE u.managerId =$team_leader_id AND projectId=$project_id GROUP BY u.id";
+        $query="SELECT sum(sumHours) as data ,u.userName as label FROM presentday p JOIN user u on u.id= p.id WHERE u.managerId =$team_leader_id AND projectId=$project_id GROUP BY u.id";
         return db_access::run_reader($query, function ($model) {
                     return $model;
                 });

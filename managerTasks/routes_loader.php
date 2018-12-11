@@ -27,6 +27,7 @@ class routes_loader {
     }
 
     function invoke($controller_name, $method_name, $params) {
+
         $data = $this->methods[$controller_name][$method_name]($params);
         return json_encode($data);
     }
@@ -46,10 +47,13 @@ class routes_loader {
                 return $this->user_controller->get_users_by_department($params['departmentName']);
             },
             'loginByPassword' => function ($params) {
-                return $this->user_controller->login_by_password($params['password'], $params['userName']);
+                return $this->user_controller->login_by_password($params);
             },
             'addUser' => function ($params) {
                 return $this->user_controller->add_user($params);
+            },
+            'deleteUser' => function ($params) {
+                return $this->user_controller->delete_user($params['userId']);
             },
             'updateUser' => function ($params) {
                 return $this->user_controller->update_user($params);
@@ -57,11 +61,11 @@ class routes_loader {
             'loginByIp' => function ($params) {
                 return $this->user_controller->login_by_ip($params["ip"]);
             },
-	    'changePassword' => function ($params) {
-	        return $this->user_controller->change_password($params["requestId"],$params["user"]);
-	     },
-            'sendMessageToManagers'=> function ($params) {
-                return $this->user_controller->send_email_manager($params["userId"],$params["subject"],$params["body"]);
+            'changePassword' => function ($params) {
+                return $this->user_controller->change_password($params["requestId"], $params["user"]);
+            },
+            'sendMessageToManagers' => function ($params) {
+                return $this->user_controller->send_email_manager($params["userId"], $params["subject"], $params["body"]);
             }
         );
     }
@@ -94,7 +98,7 @@ class routes_loader {
                 return $this->project_controller->get_projects_by_teamLeader($param['teamLeaderId']);
             }
             , 'updateProject' => function ($param) {
-                return $this->project_controller->get_projects_by_teamLeader($param['teamLeaderId']);
+                return $this->project_controller->update_project($param['project']);
             }
         );
     }

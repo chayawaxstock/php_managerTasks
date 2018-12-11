@@ -35,12 +35,12 @@ class project_controller extends validation {
 
         //add validation date
     function update_project($params) {
-        if ($this->validation_text($project['projectName'], "", 2, 15, 'nameProject'))
-            return http_response_code(422);
-        if ($this->validation_text($project['customerName'], "", 2, 15, 'customerName'))
-            return http_response_code(422);
-        if ($this->validation_int($project['numHourForProject'], 'numHourForProject', 2, 80000))
-            return http_response_code(422);
+//        if ($this->validation_text($project['projectName'], "", 2, 15, 'nameProject'))
+//            return http_response_code(422);
+//        if ($this->validation_text($project['customerName'], "", 2, 15, 'customerName'))
+//            return http_response_code(422);
+//        if ($this->validation_int($project['numHourForProject'], 'numHourForProject', 2, 80000))
+//            return http_response_code(422);
         return $this->project_service->update_project($params);
     }
 

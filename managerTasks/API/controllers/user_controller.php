@@ -8,21 +8,18 @@ class user_controller extends validation {
         $this->user_service = new user_service();
     }
 
-    function login_by_password($password,$user_name){
-	return $this->user_service->login_by_password($user_name,$password);
-    }
-
+   
     function get_all_users() {
         return $this->user_service->get_all_users();
     }
 
-    function login_by_password($password, $user_name) {
+    function login_by_password($params) {
 
-        if (!empty( $this->validation_text($password, "", 64, 64, 'password')))
-            return  header("Status: 404 Not Found");
-       if (!empty($this->validation_text($user_name, "", 2, 15, 'userName')))
-            return  header("Status: 404 Not Found");
-        return $this->user_service->login_by_password($user_name, $password);
+//        if (!empty( $this->validation_text($password, "", 64, 64, 'password')))
+//            return  header("Status: 404 Not Found");
+//       if (!empty($this->validation_text($user_name, "", 2, 15, 'userName')))
+//            return  header("Status: 404 Not Found");
+        return $this->user_service->login_by_password($params);
     }
 
     function login_by_ip($ip) {
@@ -48,8 +45,11 @@ class user_controller extends validation {
           //  return http_response_code(422);
         return $this->user_service->add_user($user);
     }
-
-    function hours_user_done_projects($user_id) {
+    
+    function delete_user($user_id){
+       return $this->user_service->delete_user($user_id);
+    }
+                function hours_user_done_projects($user_id) {
         return $this->user_service->hours_done_user_by_projects($user_id);
     }
 
